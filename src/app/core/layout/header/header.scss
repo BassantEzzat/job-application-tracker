@@ -1,0 +1,93 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 255, 254, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+
+  &__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  &__logo-mark {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--grad-a), var(--gold));
+    color: #fff;
+    font-size: 0.85rem;
+    box-shadow: 0 4px 10px rgba(70, 96, 79, 0.22);
+  }
+
+  &__nav {
+    display: flex;
+    gap: 0.25rem;
+    margin-inline-end: auto;
+
+    a {
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.15s, color 0.15s;
+
+      &:hover {
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      &.active {
+        background: var(--primary-soft);
+        color: var(--primary-dark);
+      }
+    }
+  }
+
+  @media (max-width: 640px) {
+    &__inner {
+      gap: 0.75rem;
+    }
+
+    // logo and button on the first row, nav full width below
+    &__logo {
+      margin-inline-end: auto;
+    }
+
+    .btn {
+      padding: 0.45rem 0.8rem;
+      font-size: 0.9rem;
+    }
+
+    &__nav {
+      order: 3;
+      width: 100%;
+      margin-inline-end: 0;
+
+      a {
+        flex: 1;
+        text-align: center;
+      }
+    }
+  }
+}

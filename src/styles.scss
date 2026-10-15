@@ -1,1 +1,166 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --bg: #f6f7f3;
+  --surface: #fffffe;
+  --text: #26302b;
+  --muted: #7d8a82;
+  --border: #e3e8e1;
+  --primary: #5f7f6e;
+  --primary-dark: #46604f;
+  --primary-soft: #e8f0ea;
+  --grad-a: #86a594;
+  --gold: #c9a46c;
+  --radius: 18px;
+  --shadow: 0 8px 24px rgba(70, 96, 79, 0.08);
+  --font-display: 'Playfair Display', Georgia, serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--text);
+  line-height: 1.55;
+  background:
+    radial-gradient(circle at 10% 0%, #e7efe9 0, transparent 35%),
+    radial-gradient(circle at 95% 20%, #f6eedf 0, transparent 30%),
+    var(--bg);
+  background-attachment: fixed;
+}
+
+h1,
+h2 {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+}
+
+h1 {
+  margin: 0 0 1rem;
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+
+.page-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+
+  h1 {
+    margin: 0;
+
+    &::before {
+      content: '✿ ';
+      color: var(--gold);
+      font-size: 0.8em;
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 3px;
+      margin-top: 0.35rem;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+  }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.3rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &--primary {
+    background: linear-gradient(135deg, #6f9180, var(--primary-dark));
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(70, 96, 79, 0.28);
+
+    &:hover {
+      box-shadow: 0 8px 20px rgba(70, 96, 79, 0.38);
+    }
+  }
+
+  &--ghost {
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--primary-dark);
+
+    &:hover {
+      background: var(--primary-soft);
+    }
+  }
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+
+  &--wishlist { background: #ecefea; color: #627066; }
+  &--applied { background: #e3ebf3; color: #46627f; }
+  &--interview { background: #f7ecd6; color: #8f6a24; }
+  &--offer { background: #dcf0e2; color: #2f7a4d; }
+  &--rejected { background: #f7e1de; color: #b0443a; }
+}
+
+.empty {
+  padding: 3rem 1rem;
+  text-align: center;
+  background: var(--surface);
+  border: 1.5px dashed #c9d6cc;
+  border-radius: var(--radius);
+
+  &::before {
+    content: '✿';
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 1.8rem;
+    color: var(--gold);
+  }
+
+  h2 {
+    margin: 0 0 0.25rem;
+  }
+
+  p {
+    margin: 0 0 1.25rem;
+    color: var(--muted);
+  }
+}
+
+input,
+select,
+textarea {
+  accent-color: var(--primary);
+}
+
+::selection {
+  background: var(--primary-soft);
+}

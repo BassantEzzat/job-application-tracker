@@ -1,0 +1,20 @@
+<header class="header">
+  <div class="header__inner">
+    <a class="header__logo" routerLink="/dashboard">
+      <span class="header__logo-mark">JT</span>
+      Job Tracker
+    </a>
+
+    <nav class="header__nav" aria-label="Main navigation">
+      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+      <a
+        routerLink="/applications"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Applications</a
+      >
+    </nav>
+
+    <!-- <a class="btn btn--primary" routerLink="/applications/new">+ New Application</a> -->
+  </div>
+</header>

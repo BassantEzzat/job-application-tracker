@@ -1,0 +1,176 @@
+.toolbar {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+
+  input,
+  select {
+    padding: 0.6rem 1.1rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--text);
+    font: inherit;
+  }
+
+  input {
+    flex: 1 1 260px;
+  }
+
+  input:focus,
+  select:focus {
+    outline: 2px solid var(--primary-soft);
+    border-color: var(--primary);
+  }
+
+  @media (max-width: 640px) {
+    select {
+      flex: 1 1 100%;
+    }
+  }
+}
+
+.count {
+  margin: 0.75rem 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.table-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.85rem 1rem;
+  text-align: start;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:hover td {
+  background: #f4f8f5;
+}
+
+.position {
+  font-weight: 600;
+}
+
+.company {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.actions-col {
+  text-align: end;
+  white-space: nowrap;
+}
+
+.link-btn {
+  padding: 0.3rem 0.7rem;
+  border: none;
+  border-radius: 999px;
+  background: none;
+  color: var(--primary);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--primary-soft);
+  }
+
+  &--danger {
+    color: #b0443a;
+
+    &:hover {
+      background: #f7e1de;
+    }
+  }
+}
+
+// Mobile: each row becomes a card
+@media (max-width: 640px) {
+  .table-wrap {
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  table,
+  tbody,
+  tr,
+  td {
+    display: block;
+  }
+
+  thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  tr {
+    margin-bottom: 0.75rem;
+    padding: 0.9rem 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  tbody tr:hover td {
+    background: none;
+  }
+
+  td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.3rem 0;
+    border-bottom: none;
+  }
+
+  td[data-label]::before {
+    content: attr(data-label);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  .cell-main {
+    display: block;
+    padding-bottom: 0.5rem;
+  }
+
+  .actions-col {
+    justify-content: flex-end;
+    margin-top: 0.4rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--border);
+  }
+}

@@ -1,0 +1,136 @@
+<div class="page-head">
+  <h1>{{ isEdit ? 'Edit Application' : 'New Application' }}</h1>
+</div>
+
+@if (notFound()) {
+  <section class="empty">
+    <h2>Application not found</h2>
+    <p>It may have been deleted.</p>
+    <a class="btn btn--primary" routerLink="/applications">Back to applications</a>
+  </section>
+} @else {
+  <form class="card" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div class="grid">
+      <div class="field">
+        <label for="company">Company *</label>
+        <input
+          id="company"
+          type="text"
+          formControlName="company"
+          autocomplete="organization"
+          [attr.aria-invalid]="showError('company')"
+        />
+        @if (showError('company')) {
+          <p class="error" role="alert">
+            @if (form.controls.company.hasError('required')) {
+              Company is required.
+            } @else {
+              Use at least 2 characters.
+            }
+          </p>
+        }
+      </div>
+
+      <div class="field">
+        <label for="position">Position *</label>
+        <input
+          id="position"
+          type="text"
+          formControlName="position"
+          [attr.aria-invalid]="showError('position')"
+        />
+        @if (showError('position')) {
+          <p class="error" role="alert">
+            @if (form.controls.position.hasError('required')) {
+              Position is required.
+            } @else {
+              Use at least 2 characters.
+            }
+          </p>
+        }
+      </div>
+
+      <div class="field">
+        <label for="status">Status *</label>
+        <select id="status" formControlName="status">
+          @for (s of statuses; track s.value) {
+            <option [value]="s.value">{{ s.label }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="appliedDate">Applied date *</label>
+        <input
+          id="appliedDate"
+          type="date"
+          formControlName="appliedDate"
+          [attr.aria-invalid]="showError('appliedDate')"
+        />
+        @if (showError('appliedDate')) {
+          <p class="error" role="alert">Applied date is required.</p>
+        }
+      </div>
+
+      <div class="field">
+        <label for="location">Location</label>
+        <input
+          id="location"
+          type="text"
+          formControlName="location"
+          placeholder="Cairo, Remote..."
+        />
+      </div>
+
+      <div class="field">
+        <label for="source">Source</label>
+        <input
+          id="source"
+          type="text"
+          formControlName="source"
+          list="sources"
+          placeholder="Wuzzuf, LinkedIn..."
+        />
+        <datalist id="sources">
+          @for (s of sources; track s) {
+            <option [value]="s"></option>
+          }
+        </datalist>
+      </div>
+
+      <div class="field field--full">
+        <label for="jobUrl">Job link</label>
+        <input
+          id="jobUrl"
+          type="url"
+          formControlName="jobUrl"
+          placeholder="https://..."
+          [attr.aria-invalid]="showError('jobUrl')"
+        />
+        @if (showError('jobUrl')) {
+          <p class="error" role="alert">Enter a valid link starting with http:// or https://</p>
+        }
+      </div>
+
+      <div class="field field--full">
+        <label for="notes">Notes</label>
+        <textarea
+          id="notes"
+          rows="4"
+          formControlName="notes"
+          placeholder="Interview details, contacts, follow-ups..."
+        ></textarea>
+        @if (showError('notes')) {
+          <p class="error" role="alert">Notes can't exceed 500 characters.</p>
+        }
+      </div>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn--ghost" routerLink="/applications">Cancel</a>
+      <button class="btn btn--primary" type="submit">
+        {{ isEdit ? 'Save changes' : 'Add application' }}
+      </button>
+    </div>
+  </form>
+}

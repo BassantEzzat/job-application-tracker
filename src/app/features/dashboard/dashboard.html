@@ -1,0 +1,66 @@
+<div class="page-head">
+  <h1>Dashboard</h1>
+  <a class="btn btn--primary" routerLink="/applications/new">+ New Application</a>
+</div>
+
+@if (total() === 0) {
+  <section class="empty">
+    <h2>Your job hunt starts here</h2>
+    <p>Add your first application to see your stats and progress.</p>
+    <a class="btn btn--primary" routerLink="/applications/new">Add application</a>
+  </section>
+} @else {
+  <section class="stats" aria-label="Summary">
+    @for (card of cards(); track card.label) {
+      <article class="stat">
+        <p class="stat__label">{{ card.label }}</p>
+        <p class="stat__value">{{ card.value }}</p>
+      </article>
+    }
+  </section>
+
+  <div class="panels">
+    <section class="panel">
+      <h2>By status</h2>
+      <ul class="bars">
+        @for (bar of bars(); track bar.value) {
+          <li class="bars__row">
+            <span class="bars__label">{{ bar.label }}</span>
+            <span class="bars__track">
+              <span
+                [class]="'bars__fill bars__fill--' + bar.value"
+                [style.width.%]="bar.percent"
+              ></span>
+            </span>
+            <span class="bars__count">{{ bar.count }}</span>
+          </li>
+        }
+      </ul>
+    </section>
+
+    <section class="panel">
+      <div class="panel__head">
+        <h2>Recent applications</h2>
+        <a class="panel__link" routerLink="/applications">View all</a>
+      </div>
+      <ul class="recent">
+        @for (app of recent(); track app.id) {
+          <li>
+            <a class="recent__item" [routerLink]="['/applications', app.id, 'edit']">
+              <span class="recent__main">
+                <span class="recent__position">{{ app.position }}</span>
+                <span class="recent__company">{{ app.company }}</span>
+              </span>
+              <span class="recent__meta">
+                <span [class]="'badge badge--' + app.status">{{ statusLabel(app.status) }}</span>
+                @if (app.appliedDate) {
+                  <span class="recent__date">{{ app.appliedDate | date: 'mediumDate' }}</span>
+                }
+              </span>
+            </a>
+          </li>
+        }
+      </ul>
+    </section>
+  </div>
+}
