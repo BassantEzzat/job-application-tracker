@@ -1,59 +1,78 @@
-# JobTracker
+# Job Application Tracker
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.24.
+A clean, responsive web app to track job applications from wishlist to offer, so you always know where you applied, what stage each application is at, and when your next interview is.
 
-## Development server
+**Live demo:** (https://job-application-tracker-sooty-delta.vercel.app/dashboard)
 
-To start a local development server, run:
+![Dashboard](docs/dashboard.png)
+
+## Features
+
+- **Dashboard** with summary cards (total, active, interviews, offers), a pure-CSS status chart, and the 5 most recent applications
+- **Applications list** with search, status filter, and delete
+- **Add / edit form** built with a single Reactive Form and validation, reused for both modes based on the route
+- **Persistent data** saved in `localStorage`, so it survives refreshes
+- **Fully responsive**: the table turns into cards on mobile
+- **Lazy-loaded routes** to keep the initial bundle small
+
+## Tech stack
+
+- Angular (standalone components, signals, new control flow `@if` / `@for`)
+- Reactive Forms
+- SCSS with CSS custom properties for theming
+- Unit tests with the Angular test runner
+
+## Architecture
+
+```
+Component (UI)  <->  ApplicationsStore (signals)  <->  StorageService  <->  localStorage
+```
+
+- `ApplicationsStore` is the single source of truth. Data lives in one signal, and derived values (total, count per status) are `computed`, so nothing is duplicated or out of sync.
+- Every change goes through one `commit()` method that updates the signal and persists to storage together.
+- Persistence is isolated in `StorageService`, so swapping `localStorage` for a real API means changing a single file.
+
+## Getting started
 
 ```bash
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Open http://localhost:4200.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Run the tests
 
 ```bash
-ng generate component component-name
+ng test --watch=false
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+### Production build
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Project structure
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
+```
+src/app
+├── core
+│   ├── layout/header
+│   ├── models        # Application types and status list
+│   └── store         # ApplicationsStore (signals)
+└── features
+    ├── dashboard
+    └── applications  # list + form
 ```
 
-## Running end-to-end tests
+## Roadmap
 
-For end-to-end (e2e) testing, run:
+- Backend API with authentication
+- Drag and drop between status columns (kanban view)
+- Interview reminders and calendar export
+- Export / import as CSV
 
-```bash
-ng e2e
-```
+## Author
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Built by Bassant. (https://github.com/BassantEzzat)
